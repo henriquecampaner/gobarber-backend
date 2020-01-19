@@ -20,7 +20,7 @@ const upload = multer(multerConfig);
 routes.post('/users', UserController.store);
 routes.post('/sessions', SessionController.store);
 
-routes.get('/', (req, res) => res.send('Ok'));
+routes.get('/', (req, res) => res.send('ok!'));
 
 routes.use(authMiddleware);
 // nessa posicao, esse middleware so serva para as rotas posteriores
