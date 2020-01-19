@@ -3,7 +3,7 @@ import 'dotenv/config';
 import express from 'express';
 import path from 'path';
 import cors from 'cors';
-import Youch from 'Youch';
+import Youch from 'youch';
 import * as Sentry from '@sentry/node';
 import 'express-async-errors';
 // importar async error antes das rotas
