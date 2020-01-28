@@ -11,25 +11,32 @@ import ScheduleController from './app/controllers/ScheduleController';
 import NotificationController from './app/controllers/NotificationController';
 import AvailableController from './app/controllers/AvailableController';
 
+import validateUserStore from './app/validators/UserStore';
+import validateUserUpdate from './app/validators/UserUpdate';
+import validateSessionStore from './app/validators/SessionStore';
+import validateAppointmentStore from './app/validators/AppointmentStore';
+
 import authMiddleware from './app/middleware/auth';
 
 const routes = new Router();
 
 const upload = multer(multerConfig);
 // criar a variavel upload com o arguento de configuracao
-routes.post('/users', UserController.store);
-routes.post('/sessions', SessionController.store);
-
-routes.get('/', (req, res) => res.send('ok!'));
+routes.post('/users', validateUserStore, UserController.store);
+routes.post('/sessions', validateSessionStore, SessionController.store);
 
 routes.use(authMiddleware);
 // nessa posicao, esse middleware so serva para as rotas posteriores
-routes.put('/users', UserController.update);
+routes.put('/users', validateUserUpdate, UserController.update);
 
 routes.get('/providers', ProvidersController.index);
 routes.get('/providers/:providerId/available', AvailableController.index);
 
-routes.post('/appointments', AppointmentsController.store);
+routes.post(
+  '/appointments',
+  validateAppointmentStore,
+  AppointmentsController.store
+);
 routes.get('/appointments', AppointmentsController.index);
 routes.delete('/appointments/:id', AppointmentsController.delete);
 
