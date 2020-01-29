@@ -32,7 +32,7 @@ class App {
   middlewares() {
     this.server.use(Sentry.Handlers.requestHandler());
     // coloca o sentry para handle the errors
-    this.server.use(cors({ origin: 'http://gobarber.campaner.me' }));
+    this.server.use(cors({ origin: 'https://campaner-gobarber.netlify.com' }));
     this.server.use(helmet());
     this.server.use(express.json());
     this.server.use(
